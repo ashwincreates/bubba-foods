@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import BubbaNav from './components/BubbaNav';
+import BrandPage from './pages/BrandPage';
+import Delivery from './pages/Delivery';
+import Cart from './components/Cart';
+import Dining from './pages/Dining';
+import FoodItemModal from './components/FoodItemModal';
+import { useState } from 'react';
+import Restaurant from './pages/Restaurant';
 
 function App() {
+  const [show, setShow] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BubbaNav />
+      <Routes>
+        <Route path='/'>
+            <Route path='' element={<HomePage/>}/>
+            <Route path=':brand/' element={<BrandPage/>}>
+              <Route index element={<Delivery/>}></Route>
+              <Route path='delivery' element={<Delivery/>}></Route>
+              <Route path='dining' element={<Dining/>}>
+              </Route>
+            </Route>
+            <Route path=':brand/dining/:restaurant' element={<Restaurant/>}/>
+        </Route>
+      </Routes>
+      <Outlet/>
+      <Cart/>
+      <FoodItemModal show={show}/>
+    </>
   );
 }
 
