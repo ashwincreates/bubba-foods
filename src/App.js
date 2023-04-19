@@ -9,6 +9,8 @@ import Dining from './pages/Dining';
 import FoodItemModal from './components/FoodItemModal';
 import { useState } from 'react';
 import Restaurant from './pages/Restaurant';
+import LoginImage from './pages/LoginImage';
+import LoginForm from './pages/Login';
 
 function App() {
   const [show, setShow] = useState(false)
@@ -25,8 +27,12 @@ function App() {
               </Route>
             </Route>
             <Route path=':brand/dining/:restaurant' element={<Restaurant/>}/>
+            <Route path='login' element={<LoginImage/>}/>
+            
+            
         </Route>
       </Routes>
+      <LoginForm/>
       <Outlet/>
       <Cart/>
       <FoodItemModal show={show}/>

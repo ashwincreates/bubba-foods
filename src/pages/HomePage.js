@@ -2,8 +2,8 @@ import BubbaCarousel from '../components/BubbaCarousel';
 import { Col, Container, Row } from 'react-bootstrap';
 import Brands from '../components/Brands';
 import Section from '../components/Section';
-import Footer from '../components/Footer';
-import FoodItemModal from '../components/FoodItemModal';
+// import Footer from '../components/Footer';
+// import FoodItemModal from '../components/FoodItemModal';
 import ItemCard from '../components/ItemCard';
 
 function HomePage() {
