@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import FormImage from "./LoginImage";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +30,8 @@ const LoginForm = () => {
   };
 
   return (
+      <>
+      <FormImage/>
     <form className="login-form" onSubmit={handleLogin}>
       <div className="form-group">
         <input
@@ -60,6 +63,7 @@ const LoginForm = () => {
         </a>
       </div>
     </form>
+    </>
   );
 };
 

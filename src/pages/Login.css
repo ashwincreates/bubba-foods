@@ -59,7 +59,7 @@
   }
   .login-links a:hover {
     text-decoration: underline;
-    color: black;
+    color: orange;
   }
   .login-links span:hover {
     text-decoration: underline;
