@@ -13,6 +13,7 @@ import LoginImage from './pages/LoginImage';
 import LoginForm from './pages/Login';
 import RegisterImage from './pages/RegisterImage';
 import Register  from './pages/Register';
+import ProfileMain from './pages/ProfileMain';
 
 function App() {
   const [show, setShow] = useState(false)
@@ -31,6 +32,7 @@ function App() {
             <Route path=':brand/dining/:restaurant' element={<Restaurant/>}/>
             <Route path='login' element={<LoginForm/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/profile" element={<ProfileMain/>}/>
         </Route>
       </Routes>
       <Outlet/>

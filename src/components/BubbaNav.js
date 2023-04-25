@@ -17,7 +17,13 @@ function BubbaNav() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto gap-4 align-items-center">
               <h6 className='m-0'>Welcome, guest user</h6>
-              <User size={18}/>
+              <Nav.Item>
+                <Link to={'/profile'}>
+                  <button className='btn btn-secondary rounded-circle'>
+                    <User size={18}/>
+                  </button>
+                </Link>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
