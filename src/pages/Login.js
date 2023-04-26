@@ -56,8 +56,8 @@ const LoginForm = () => {
       </div>
       <button type="submit">Login</button>
       <div className="login-links">
-        <a href="#" onClick={handleCreateAccount}>
-          <span>Create new account</span>
+        <a id="password" href="#" onClick={handleForgotPassword}>
+          <Link to="/register">Create New Account</Link>
         </a>
        <a id="password" href="#" onClick={handleForgotPassword}>
        <Link to="/forgot">Forgot password?</Link>

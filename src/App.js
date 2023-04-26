@@ -9,9 +9,11 @@ import Dining from './pages/Dining';
 import FoodItemModal from './components/FoodItemModal';
 import { useState } from 'react';
 import Restaurant from './pages/Restaurant';
+import LoginImage from './pages/LoginImage';
 import LoginForm from './pages/Login';
 import RegisterImage from './pages/RegisterImage';
 import Register  from './pages/Register';
+import ProfileMain from './pages/ProfileMain';
 import  UserProfileForm from './pages/ForgotPassword';
 
 function App() {
@@ -31,8 +33,8 @@ function App() {
             <Route path=':brand/dining/:restaurant' element={<Restaurant/>}/>
             <Route path='login' element={<LoginForm/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/profile" element={<ProfileMain/>}/>
             <Route path="/forgot" element={< UserProfileForm/>}/>
-            
         </Route>
       </Routes>
       <Outlet/>
