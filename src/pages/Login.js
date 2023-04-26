@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import FormImage from "./LoginImage";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ const LoginForm = () => {
         <input
           type="email"
           id="email"
-          placeholder="mobile number or email"
+          placeholder="Mobile number or email"
           value={email}
           onChange={handleEmailChange}
           required
@@ -58,8 +59,8 @@ const LoginForm = () => {
         <a href="#" onClick={handleCreateAccount}>
           <span>Create new account</span>
         </a>
-        <a id="password" href="#" onClick={handleForgotPassword}>
-          Forgot password?
+       <a id="password" href="#" onClick={handleForgotPassword}>
+       <Link to="/forgot">Forgot password?</Link>
         </a>
       </div>
     </form>
