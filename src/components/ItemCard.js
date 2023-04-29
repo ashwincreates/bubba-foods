@@ -1,28 +1,28 @@
-import { Badge, Card } from "react-bootstrap"
 import { Star } from "react-feather"
+import { Link } from "react-router-dom"
 
-function ItemCard() {
+function ItemCard({menuItem, to, action, offer}) {
     return (
-        <>
-            <Card>
-                <Card.Img variant="top" style={{objectFit: 'cover'}} src="https://images.unsplash.com/photo-1589302168068-964664d93dc0" height="200px" />
-                <Card.Body>
-                <div className="d-flex flex-row justify-content-between">
-                    <h6>Paradise Biryani</h6>
-                    <span>
-                        <Badge>3.4 <Star size={12}/></Badge>
-                    </span>
+        <Link to={to}>
+            <div className="rounded md:hover:scale-105 ease-in duration-50 overflow-hidden drop-shadow-md bg-white flex-col basis-[300px] min-w-0 grow-0 shrink-0 flex min-w-0 align-start">
+                <img className="object-cover h-[250px]" src={menuItem.src} alt="item" />
+                <div className="p-3">
+                    <div className="flex justify-between">
+                        <div>
+                            <h1 className="font-bold">{menuItem.name}</h1>
+                            <p className="text-sm text-gray-400">{menuItem.description}</p>
+                        </div>
+                        <div className="text-white rounded-full px-2 py-1 bg-green-800 flex self-start text-sm gap-1"><span>{menuItem.rating}</span> <Star fill="white" size={18} /></div>
+                    </div>
+                    <hr className="my-3" />
+                    <div className="flex justify-between">
+                        <span className="text-lg font-bold" >Rs. {menuItem.price}</span>
+                        {action}
+                    </div>
                 </div>
-                <p>
-                    25 - 30min  
-                </p>
-                <span className="d-flex gap-1">
-                    <h5>$250</h5><span>for one</span>
-                </span>
-                </Card.Body>
-                <Card.Footer className="color-blue-100">50% off upto $100</Card.Footer>
-            </Card>
-        </>
+                {offer}
+            </div>
+        </Link>
     )
 }
 

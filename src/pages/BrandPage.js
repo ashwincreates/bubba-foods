@@ -1,33 +1,39 @@
-import { Col, Nav, Row } from "react-bootstrap";
-import { Link, Outlet, Route, Routes } from "react-router-dom";
-import BubbaCarousel from "../components/BubbaCarousel";
-import Footer from "../components/Footer";
-import Delivery from "./Delivery";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import Carousel from "../components/Carousel/Carousel";
+import { BrandProvider } from "../context/BrandContext";
 
 function BrandPage() {
-    return (
-        <>
-            <BubbaCarousel/>
-            <Nav variant="tabs" defaultActiveKey="delivery" className="flex justify-content-center">
-                <Nav.Item>
-                  <Nav.Link eventKey="delivery">
-                    <Link to={"delivery"} className="text-decoration-none">
-                      Delivery / Takeaway
-                    </Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="dining">
-                    <Link to={"dining"} className="text-decoration-none">
-                      Dining / Restaurant
-                    </Link>
-                  </Nav.Link>
-                </Nav.Item>
-            </Nav>
-            <Outlet/>
-            <Col style={{height: '50px'}}></Col>
-        </>
-    )
+
+  const { state } = useLocation()
+
+  return (
+    <BrandProvider id={state.id}>
+      {/* Advertisement Carousel */}
+      <Carousel className="md:mx-4 relative">
+        {
+          [1, 2, 3].map(e =>
+            <Carousel.Item key={e} src={"https://images.unsplash.com/photo-1606491956689-2ea866880c84"} />
+          )
+        }
+      </Carousel>
+      {/* ---- */}
+        <nav className="flex sticky top-[64px] bg-white z-30 justify-center border-b border-gray-200 pb-3 max-md:pt-3">
+          <div>
+            <NavLink
+              className={({ isActive }) => `px-8 pb-3 ${isActive ? 'border-b-2 border-orange-500' : 'text-gray-400'}`}
+              to={`delivery`}>
+              Delivery
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => `px-8 pb-3 ${isActive ? 'border-b-2 border-orange-500' : 'text-gray-400'}`}
+              to={`dining`}>
+              Dining
+            </NavLink>
+          </div>
+        </nav>
+        <Outlet />
+    </BrandProvider>
+  )
 }
 
 export default BrandPage

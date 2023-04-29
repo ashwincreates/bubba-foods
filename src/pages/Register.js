@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./Register.css";
+import Banner from "../components/Banner/Banner";
+import Footer from "../components/Footer";
 import RegisterImage from "./RegisterImage";
 
 const Register = () => {
@@ -47,10 +48,16 @@ const Register = () => {
 
     return (
         <>
-        <RegisterImage/>
-        <form className="signup-form" onSubmit={handlesignup}>
-            <div className="form-group">
+            <Banner src="https://images.pexels.com/photos/2271107/pexels-photo-2271107.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <div className="absolute bottom-0 text-white h-full flex flex-col justify-center items-center w-full drop-shadow-lg">
+                    <img className="w-[200px]" alt="logo" src="images/Bubba Foods1.png"></img>
+                    <div className="mt-4 font-light">India's #1 Brand at your fingertips</div>
+                </div>
+            </Banner>
+            <form className="mx-2 w-full md:max-w-[300px] md:mx-auto flex text-center flex-col gap-3 text-sm mt-4" onSubmit={handlesignup}>
+                <h2 className="p-2 text-xl font-semi">Sign Up</h2>
                 <input
+                    className="primary-input"
                     type="text"
                     id="FName"
                     placeholder="First Name"
@@ -58,10 +65,8 @@ const Register = () => {
                     onChange={handleFirstName}
                     required
                 />
-            </div>
-
-            <div className="form-group">
                 <input
+                    className="primary-input"
                     type="text"
                     id="LName"
                     placeholder="Last Name"
@@ -69,10 +74,8 @@ const Register = () => {
                     onChange={handleLastName}
                     required
                 />
-            </div>
-
-            <div className="form-group">
                 <input
+                    className="primary-input"
                     type="text"
                     id="Mobile"
                     placeholder="Mobile Number"
@@ -80,10 +83,8 @@ const Register = () => {
                     onChange={handleMobileNumber}
                     required
                 />
-            </div>
-
-            <div className="form-group">
                 <input
+                    className="primary-input"
                     type="email"
                     id="Email"
                     placeholder="Email"
@@ -91,10 +92,8 @@ const Register = () => {
                     onChange={handleEmailChange}
                     required
                 />
-            </div>
-
-            <div className="form-group">
                 <input
+                    className="primary-input"
                     type="password"
                     id="Password"
                     placeholder="Enter Password"
@@ -102,10 +101,8 @@ const Register = () => {
                     onChange={handlePasswordChange}
                     required
                 />
-            </div>
-
-            <div className="form-group">
                 <input
+                    className="primary-input"
                     type="password"
                     id="CPassword"
                     placeholder="Confirm Password"
@@ -113,16 +110,14 @@ const Register = () => {
                     onChange={handleCPassword}
                     required
                 />
-            </div>
+                <button className="primary-button" type="submit">Login</button>
+                <a className="text-gray-400 hover:underline" href="">
+                    <span>By Creating an account, you accept our Terms & Conditions</span>
+                </a>
+            </form>
+            <Footer />
+        </>
 
-                <span>By Creating an account, you accept our Terms & Conditions</span>
-
-            <button type="submit">Create an account</button>
-            <div className="login-links">
-            </div>
-        </form>
-    </>
-    
     );
 
 };

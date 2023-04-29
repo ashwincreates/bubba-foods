@@ -1,5 +1,6 @@
 import React from 'react';
-import './Reviews.css';
+import { MessageCircle, Star, ThumbsUp } from 'react-feather';
+import Header from '../Header';
 
 const reviews = [
   {
@@ -96,36 +97,51 @@ const reviews = [
 
 function Reviews() {
   return (
-    <div className="reviews-container">
-      <h2>Customer Reviews</h2>
-      {reviews.slice(0, 10).map((review) => (
-        <div key={review.id} className="review">
-          <div className="profile-info">
-            <img src={review.profilePic} alt={review.name} className="profile-pic" />
-            <div className="name">{review.name}</div>
-          </div>
-          <div className="rating-review-container">
-            <div className="rating">
-              {Array.from({ length: review.rating }).map((_, index) => (
-                <span key={index} className="star">&#9733;</span>
-              ))}
-              <span className="rating-number">{review.rating}/5</span>
+    <div className="max-w-3xl m-auto max-md:px-4">
+      <div className='flex justify-between'>
+        <Header title={`${reviews.length} reviews`} />
+        <button className='primary-button self-center'>Add Review</button>
+      </div>
+      {
+        reviews.slice(0, 10).map((review) => (
+          <div key={review.id} className="flex flex-col gap-4 border-b border-gray-200 py-4">
+            <div className='flex justify-between'>
+              <div className='flex flex-col gap-2'>
+                <div className="flex items-center gap-4">
+                  <img src={review.profilePic} alt={review.name} className="h-[50px] w-[50px] rounded-full" />
+                  <div>
+                    <div className="text-sm font-semi text-gray-700">{review.name}</div>
+                    <div className="flex">
+                      {Array.from({ length: review.rating }).map((_, index) => (
+                        <span key={index}><Star size={20} stroke="transparent" fill="orange" /></span>
+                      ))}
+                      {Array.from({ length: 5 - review.rating }).map((_, index) => (
+                        <span key={index}><Star size={20} stroke="transparent" fill="lightgrey" /></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  "{review.review}"
+                </div>
+              </div>
+              <div className="flex gap-4 self-start text-xs">
+                <span className='flex gap-2 items-center'>
+                  <span><ThumbsUp size={20}/></span> 
+                  <p>
+                    {review.helpfulCount}
+                  </p>
+                </span>
+                <span className='flex gap-2 items-center'>
+                  <span><MessageCircle size={20}/></span>
+                  <p>
+                    {review.commentCount}
+                  </p>
+                </span>
+              </div>
             </div>
-            <div className="review-text">{review.review}</div>
           </div>
-          <div className="interactions">
-            <button className="helpful">
-              <span>&#128077;</span> {review.helpfulCount} Helpful
-            </button>
-            <button className="comment">
-              {review.commentCount} Comment{review.commentCount > 1 && "s"}
-            </button>
-            <button className="share">
-              <span>&#128279;</span> Share
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }

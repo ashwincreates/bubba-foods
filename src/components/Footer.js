@@ -1,27 +1,20 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
-
-
 function Footer() {
     return (
-        <>
-            <Container style={{height: "100px"}} className="py-5">
-                <Row>
-                    <Col xs={10} className="mx-auto d-flex justify-content-between">
-                        <div>
-                            <img className="mb-3" src="/Bubba Foods.png" height={28} alt="logo"/>
-                            <p className="fs-6">Copyright Bubba Foods</p>
-                        </div>
-                        <div className="d-flex gap-2">
-                            <a href="#ad">link 1</a>
-                            <a href="#ad">link 1</a>
-                            <a href="#ad">link 1</a>
-                            <a href="#ad">link 1</a>
-                            <a href="#ad">link 1</a>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </>
+        <footer>
+            <div className="max-w-4xl mx-auto py-10">
+                <div className="">
+                    <img src='/images/Bubba Foods1.png' alt='logo' width='40px'/>
+                </div>
+                <div className="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
+                    <p className="order-2 md:order-1 mt-8 md:mt-0"> &copy; Bubba Foods, 2021. </p>
+                    <div className="order-1 md:order-2">
+                        <span className="px-2">About us</span>
+                        <span className="px-2 border-l">Contact us</span>
+                        <span className="px-2 border-l">Privacy Policy</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
     )
 }
 
