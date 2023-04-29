@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Carousel from "../components/Carousel/Carousel";
 import Header from "../components/Header";
 import ItemCard from "../components/ItemCard";
 import Menu from "../components/Menu/Menu";
+import { BrandContext } from "../context/BrandContext";
 
 function Delivery() {
     const [modalShow, setModalShow] = useState(false);
-    const { state } = useLocation()
+    const { id } = useContext(BrandContext)
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/menu/${state.id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/menu/${id}`)
             .then(response => response.json())
             .then(data => {
                 // Grouping items based on Speciality

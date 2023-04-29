@@ -1,13 +1,13 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import Carousel from "../components/Carousel/Carousel";
 import { BrandProvider } from "../context/BrandContext";
 
 function BrandPage() {
 
-  const { state } = useLocation()
+  const {id} = useParams()
 
   return (
-    <BrandProvider id={state.id}>
+    <BrandProvider id={id}>
       {/* Advertisement Carousel */}
       <Carousel className="md:mx-4 relative">
         {

@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 import { UserContext } from "../context/UserContext";
 
 const LoginForm = () => {
