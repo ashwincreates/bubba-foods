@@ -82,8 +82,7 @@ function AddressBook() {
         />
       ) : (
         <div className="address-list">
-          <h2>Address Book</h2>
-          <button className="add-address-button" onClick={handleAddAddress}>
+          <button className="primary-button" onClick={handleAddAddress}>
             Add Address
           </button>
           {addresses.map((address) => (

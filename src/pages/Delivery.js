@@ -1,14 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import Carousel from "../components/Carousel/Carousel";
 import Header from "../components/Header";
 import ItemCard from "../components/ItemCard";
 import Menu from "../components/Menu/Menu";
 import { BrandContext } from "../context/BrandContext";
+import { FoodItemModalContext } from "../context/FoodItemModalContext";
 
 function Delivery() {
-    const [modalShow, setModalShow] = useState(false);
     const { id } = useContext(BrandContext)
+    const { openModal } = useContext(FoodItemModalContext)
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
@@ -24,7 +23,7 @@ function Delivery() {
                 }, {});
                 setMenu(menu_data)
             })
-    }, [])
+    }, [id])
 
     return (
         <div className="mx-3 md:mx-4 flex gap-4">
@@ -34,7 +33,7 @@ function Delivery() {
                     Object.keys(menu).map(e =>
                         <>
                             <Header title={`${e}`} id={`${e.toLowerCase().replace(' ', '_')}`} />
-                            <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-10">
+                            <section className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-10">
                                 {
                                     menu[e].map(item =>
                                         <ItemCard
@@ -51,6 +50,7 @@ function Delivery() {
                                                     Grab Now over 50% off
                                                 </div>
                                             }
+                                            onClick={(_) => openModal(item)}
                                         />
                                     )
                                 }

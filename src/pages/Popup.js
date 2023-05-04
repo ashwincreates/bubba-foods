@@ -34,6 +34,7 @@ function Popup() {
       <div className="flex flex-col gap-2">
         <label htmlFor="num-people">Number of People:</label>
         <select
+            className="primary-input"
           id="num-people"
           value={numPeople}
           onChange={(e) => setNumPeople(e.target.value)}
@@ -48,6 +49,7 @@ function Popup() {
         </select>
         <label htmlFor="time">Time:</label>
         <select
+      className="primary-input"
           id="time"
           value={time}
           onChange={(e) => setTime(e.target.value)}

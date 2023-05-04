@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./AddressEditor.css";
 
 function AddressEditor({ address, onSave, onCancel }) {
   const [name, setName] = useState(address.name);

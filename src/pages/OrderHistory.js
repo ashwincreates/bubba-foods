@@ -56,7 +56,6 @@ function OrderHistory() {
 
   return (
     <div className="order-history-container">
-      <h2>Order History</h2>
       {orders.map((order) => (
         <div className="order-history-item" key={order.id}>
           <div className="order-history-header">

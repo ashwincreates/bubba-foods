@@ -25,7 +25,7 @@
   }
 
   .primary-input {
-    @apply p-3 border-2 border-gray-200 rounded
+    @apply p-3 border-2 border-gray-200 rounded disabled:border-transparent
   }
 
   .no-scrollbar {

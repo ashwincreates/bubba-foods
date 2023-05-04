@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Profile.css";
 
 function Profile() {
     const [firstName, setFirstName] = useState("John");
@@ -85,79 +84,65 @@ function Profile() {
     };
 
     return (
-        <div className="profile-container">
-            <div className="profile-fields-container">
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">First Name:</div>
-                    <div className="profile-details-field-value">
-                        <input type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        {errors.firstName && <div className="error">{errors.firstName}</div>}
-                    </div>
-                </div>
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">Last Name:</div>
-                    <div className="profile-details-field-value">
-                        <input
-                            type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                        {errors.lastName && <div className="error">{errors.lastName}</div>}
-                    </div>
-                </div>
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">Email Address:</div>
-                    <div className="profile-details-field-value">
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        {errors.email && <div className="error">{errors.email}</div>}
-                    </div>
-                </div>
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">Contact Number:</div>
-                    <div className="profile-details-field-value">
-                        <input
-                            type="tel"
-                            value={contactNumber}
-                            onChange={(e) => setContactNumber(e.target.value)}
-                        />
-                        {errors.contactNumber && <div className="error">{errors.contactNumber}</div>}
-                    </div>
-                </div>
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">Password:</div>
-                    <div className="profile-details-field-value">
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {errors.password && <div className="error">{errors.password}</div>}
-                    </div>
-                </div>
-                <div className="profile-details-field">
-                    <div className="profile-details-field-label">Confirm Password:</div>
-                    <div className="profile-details-field-value">
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-                    </div>
-                </div>
-                <div className="profile-save-button-container">
-                    <button className="profile-save-button" onClick={handleSave}>
-                        Save
-                    </button>
-                </div>
-            </div>
+        <div className="flex flex-col gap-2">
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="name">First Name</label>
+            <input
+                disabled
+                type="text"
+                className="primary-input clear-both"
+                id="name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+            />
+            {errors.firstName && <div className="error">{errors.firstName}</div>}
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="lastname">Last Name</label>
+            <input
+                type="text"
+                className="primary-input"
+                id="lastname"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+            />
+            {errors.lastName && <div className="error">{errors.lastName}</div>}
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="email">Email</label>
+            <input
+                type="email"
+                className="primary-input"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <div className="error">{errors.email}</div>}
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="contact">Contact</label>
+            <input
+                type="tel"
+                className="primary-input"
+                id="contact"
+                value={contactNumber}
+                onChange={(e) => setContactNumber(e.target.value)}
+            />
+            {errors.contactNumber && <div className="error">{errors.contactNumber}</div>}
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="password">Password</label>
+            <input
+                type="password"
+                className="primary-input"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <div className="error">{errors.password}</div>}
+            <label className="text-gray-400 font-light my-1 text-sm me-3 block" htmlFor="confirm">Confirm Password</label>
+            <input
+                type="password"
+                className="primary-input"
+                id="confirm"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
+            <button className="primary-button self-start" onClick={handleSave}>
+                Save
+            </button>
         </div>
     );
 }

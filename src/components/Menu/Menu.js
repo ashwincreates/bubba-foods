@@ -5,7 +5,7 @@ import Header from "../Header"
 function Menu({ menu }) {
     const { hash } = useLocation()
     return (
-        <nav className="min-w-[250px] sticky top-[72px] border-r hidden md:block">
+        <nav className="min-w-[250px] sticky top-[134px] border-r hidden md:block">
             <Header title={"Menu"} />
             <ol className="flex flex-col">
                 {

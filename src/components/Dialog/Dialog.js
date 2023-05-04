@@ -4,7 +4,7 @@ import { X } from 'react-feather'
 
 const ModalContext = createContext({})
 
-function Modal({children, title='button title'}) {
+function Modal({children, title='button title', ...props}) {
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
@@ -26,7 +26,7 @@ function Modal({children, title='button title'}) {
         </button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" {...props} className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

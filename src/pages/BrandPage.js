@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import Carousel from "../components/Carousel/Carousel";
 import { BrandProvider } from "../context/BrandContext";
 

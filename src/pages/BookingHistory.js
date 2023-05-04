@@ -42,11 +42,10 @@ function BookingHistory(props) {
   );
 
   return (
-    <div className="booking-history-container">
-      <h2>Booking History</h2>
+    <div className="">
       {filteredBookings.length > 0 ? (
-        <table className="booking-history-table">
-          <thead>
+        <table className="table-auto w-full">
+          <thead className="border-b p-6">
             <tr>
               <th>Restaurant</th>
               <th>Date</th>
