@@ -19,6 +19,7 @@ import AddressBook from './pages/AddressBook';
 import OrderHistory from './pages/OrderHistory';
 import BookingHistory from './pages/BookingHistory';
 import Cart from './components/Cart';
+import Rewards from './pages/Rewards';
 
 function App() {
     const [show, setShow] = useState(false)
@@ -56,6 +57,7 @@ function App() {
                         <Route path='addressbook' element={<AddressBook/>}/>
                         <Route path='orders' element={<OrderHistory/>}/>
                         <Route path='bookings' element={<BookingHistory/>}/>
+                        <Route path='rewards' element={<Rewards/>}/>
                         {/* <Route path='favourites' element={}/> */}
                     </Route>
                 </Route>
