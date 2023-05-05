@@ -53,6 +53,11 @@ function ProfileDetails() {
               to={`bookings`}>
               Bookings
             </NavLink>
+            <NavLink
+              className={({ isActive }) => `px-8 pb-3 ${isActive ? 'border-b-2 border-orange-500' : 'text-gray-400'}`}
+              to={`rewards`}>
+              Rewards
+            </NavLink>
         </nav>
       <div className="max-w-4xl w-full m-auto">
         {/* <div className="profile-details-left-container">
