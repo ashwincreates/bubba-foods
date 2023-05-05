@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "./BookingHistory.css";
+import Reviewpopup from'./Reviewpopup';
 
 function BookingHistory(props) {
+  const [showReviewpopup, setShowReviewpopup] = useState(false);
+  const handleReviewClick = () => {
+    setShowReviewpopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowReviewpopup(false);
+  };
   const [bookings, setBookings] = useState([
     {
       id: 1,
@@ -68,6 +77,10 @@ function BookingHistory(props) {
         </table>
       ) : (
         <p>You have no booking history.</p>
+      )}
+                     <button className='primary-button self-center'onClick={handleReviewClick} style={{marginTop:'2rem', marginBottom:'2rem',marginLeft:'23rem'}}>Add Comment</button>
+                        {showReviewpopup && (
+        <Reviewpopup onClose={handleClosePopup} />
       )}
     </div>
   );

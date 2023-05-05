@@ -1,7 +1,16 @@
-import React from "react";
+import {React,useState} from "react";
 import "./OrderHistory.css";
+import Reviewpopup from'./Reviewpopup';
 
 function OrderHistory() {
+  const [showReviewpopup, setShowReviewpopup] = useState(false);
+  const handleReviewClick = () => {
+    setShowReviewpopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowReviewpopup(false);
+  };
   const orders = [
     {
       id: 1,
@@ -76,6 +85,10 @@ function OrderHistory() {
           </div>
         </div>
       ))}
+                  <button className='primary-button self-center'onClick={handleReviewClick} style={{marginBottom:'2rem',marginLeft:'23rem'}}>Add Comment</button>
+                        {showReviewpopup && (
+        <Reviewpopup onClose={handleClosePopup} />
+      )}
     </div>
   );
 }
