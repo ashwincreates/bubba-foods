@@ -23,7 +23,7 @@ export default function Rewards() {
         <center>
           <div className="card-description">Get Coins for Payment</div>
         </center>
-        <div>
+        <div className="abc">
           <p>Paid Amount: {paidAmount}</p>
           <input
             type="number"
