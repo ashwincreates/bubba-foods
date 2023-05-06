@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+import Cartpage from "../pages/CartPage"
 import Modal from "./Dialog/Dialog"
 
 function Cart() {
@@ -9,10 +11,10 @@ function Cart() {
                     <Modal.Close />
                 </div>
                 <div className="min-h-[300px]">
-                    No Item added yet
+                    <Cartpage/>
                 </div>
             </Modal>
-            <button className="primary-button self-center">Checkout</button>
+            <Link to={'checkout'} className="primary-button self-center">Checkout</Link>
         </div>
     )
 }
