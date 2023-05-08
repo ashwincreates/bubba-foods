@@ -9,7 +9,7 @@ function UserInfo() {
         <>
             Welcome, {user ? user.name : "Guest"}
             {
-                user ?<User size={20} /> : 
+                user ? <Link to='/profile/wadd/details'><User size={20} /></Link> : 
                 <>
                     <Link to='/login' className="primary-button">Login</Link>
                     <Link to='/register' className="secondary-button">Register</Link>
