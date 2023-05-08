@@ -1,6 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 import { ArrowLeft, ArrowRight, Star } from "react-feather";
+import { Link } from "react-router-dom";
 
 function Carousel({ children, ...props }) {
 	const [emblaRef, emblaApi] = useEmblaCarousel({ containScroll: 'trimSnaps' });
@@ -38,6 +39,16 @@ function Item({ src }) {
 	)
 }
 
+function AdItem({ src, goto }) {
+	return (
+		<div className="rounded overflow-hidden basis-full flex justify-center items-center grow-0 shrink-0 min-w-0 w-full h-[300px]">
+            <Link to={goto}>
+			    <img src={src} alt="carousel slide" />
+            </Link>
+		</div>
+	)
+}
+
 function MenuItem({ menuItem }) {
 	return (
 		<div className="rounded md:hover:scale-105 ease-in duration-50 overflow-hidden drop-shadow-md bg-white flex-col basis-[300px] min-w-0 grow-0 shrink-0 flex min-w-0 align-start">
@@ -65,5 +76,6 @@ function MenuItem({ menuItem }) {
 
 Carousel.Item = Item
 Carousel.MenuItem = MenuItem
+Carousel.AdItem = AdItem
 
 export default Carousel;
