@@ -71,6 +71,7 @@ export default function CheckOut() {
                 navigate('/')
             } else {
                 toast.error('A error has been encountered, Please try again later')
+                navigate('/')
             }
         })
     }

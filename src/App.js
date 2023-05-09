@@ -58,7 +58,7 @@ function App() {
                         <Route path='orders' element={<OrderHistory />} />
                         <Route path='bookings' element={<BookingHistory />} />
                         <Route path='rewards' element={<Rewards />} />
-                        <Route path='support' element={<Support/>} />
+                        <Route path='support' element={<Support />} />
                         {/* <Route path='favourites' element={}/> */}
                     </Route>
                 </Route>
@@ -80,7 +80,7 @@ function App() {
                 <Route path='login' element={<LoginForm />} />
                 <Route path='register' element={<Register />} />
             </Routes>
-            <Toaster position='bottom-center' reverseOrder={false}/>
+            <Toaster position='bottom-center' reverseOrder={false} />
         </>
     );
 }
