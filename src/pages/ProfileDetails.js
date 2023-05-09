@@ -36,7 +36,7 @@ function ProfileDetails() {
               <button className="primary-button">Update info</button>
             </div>
             <Link to="/">
-              <button className="primary-button">Logout</button>
+              <button className="primary-button">logout</button>
             </Link>
           </div>
         </div>
