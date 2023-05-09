@@ -1,132 +1,194 @@
-import React, { useState } from "react";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
+import React, { useContext, useEffect, useState } from "react";
+import Cartpage from "./CartPage";
+import { Check } from "react-feather";
+import { RadioGroup } from "@headlessui/react";
+import { FoodItemContext } from "../context/FoodItemModalContext";
+import { UserContext } from "../context/UserContext.js"
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+const ORDERSTATE = {
+    TYPE: 'type',
+    LOCATION: 'location',
+    PAYMENT: 'payment'
+}
+
+const DELIVERYTYPE = {
+    DELIVERY: 'delivery',
+    TAKEAWAY: 'takeaway'
+}
+
+const PAYMENT = {
+    CASH: 'cash',
+}
 
 export default function CheckOut() {
-  const [deliveryOption, setDeliveryOption] = useState("Delivery");
-  const [deliveryAddress, setDeliveryAddress] = useState("Address1");
-  const [paymentOption, setPaymentOption] = useState("Cash on Delivery");
 
-  const handleDeliveryOptionChange = (event) => {
-    setDeliveryOption(event.target.value);
-  };
+    const { cart, dispatch } = useContext(FoodItemContext)
+    const { user } = useContext(UserContext)
+    const navigate = useNavigate()
 
-  const handleDeliveryAddressChange = (event) => {
-    setDeliveryAddress(event.target.value);
-  };
+    const [orderDetails, setOrderDetails] = useState({
+        deliveryOption: DELIVERYTYPE.DELIVERY,
+        address: null,
+        payment: null
+    })
 
-  const handlePaymentOptionChange = (event) => {
-    setPaymentOption(event.target.value);
-  };
+    const [orderState, setOrderState] = useState(ORDERSTATE.TYPE)
+    const [valid, setValid] = useState(false)
 
-  return (
-    <div className="item-box" style={{ marginLeft:'10rem'}}>
-      <div className="row summary1">
-        <div className="col-8">
-          <RadioGroup
-            aria-label="Delivery Options"
-            name="delivery-option"
-            value={deliveryOption}
-            onChange={handleDeliveryOptionChange}
-          >
-            <FormControlLabel
-              control={<Radio />}
-              value="Delivery"
-              label="Delivery"
-            />
-            <FormControlLabel
-              value="Takeaway"
-              control={<Radio />}
-              label="Takeaway"
-            />
-          </RadioGroup>
-        </div>
-      </div>
+    useEffect(() => {
+        if (orderDetails.deliveryOption && orderDetails.address && orderDetails.payment) {
+            setValid(true)
+        } else {
+            setValid(false)
+        }
+    }, [orderDetails.deliveryOption, orderDetails.address, orderDetails.payment])
 
-      {deliveryOption === "Delivery" && (
-        <div className="item-box">
-          <div className="row summary2">
-            <div className="col-10">
-              <h5>Choose delivery address</h5>
-              <RadioGroup
-                aria-label="Delivery Addresses"
-                name="delivery-address"
-                value={deliveryAddress}
-                onChange={handleDeliveryAddressChange}
-              >
-                <FormControlLabel
-                  style={{
-                    boxShadow: "2px 2px 8px rgba(0, 0, 0, 0.2)",
-                    padding: "5px",
-                    display:"flex",
-                    marginTop:"2rem",
-                    borderRadius: "10px",
-                  }}
-                  control={<Radio />}
-                  value="Address1"
-                  label="Gachibowli street 2, Nobel Colony 482652, Hyderabad"
-                />
-                <FormControlLabel
-                  style={{
-                    boxShadow: "2px 2px 8px rgba(0, 0, 0, 0.2)",
-                    padding: "5px",
-                    borderRadius: "10px",
-                    marginTop:"1.2rem",
-                  }}
-                  value="Address2"
-                  control={<Radio />}
-                  label="Gachibowli street 2, Nobel Colony 482652, Hyderabad"
-                />
-              </RadioGroup>
-              
-            <div className="col-8">
-              <h5>Payment Options</h5>
-              <RadioGroup
-                style={{
-                  marginTop:"1.2rem",
-                }}
-                aria-label="Payment Options"
-                name="payment-option"
-                value={paymentOption}
-                onChange={handlePaymentOptionChange}
-              >
-                <FormControlLabel
-                  value="Cash on Delivery"
-                  control={<Radio />}
-                  label="Cash on Delivery"
-                />
-              </RadioGroup>
+    const placeOrder = () => {
+        console.log('Placing Order')
+
+        const requestBody = {
+            user_id: user.id,
+            restaurant_id: 'a085i00000G7ExrAAF',
+            address: orderDetails.address,
+            type: orderDetails.deliveryOption,
+            paymentOption: orderDetails.payment,
+            paymentDetails: null,
+            cart: cart,
+        }
+
+        console.log(requestBody)
+
+        fetch(`${process.env.REACT_APP_API_URL}/order/neworder`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+        }).then(response => {
+            if (response.ok) {
+                toast.success('Your order has been placed')
+                dispatch({ type: 'emptyCart' })
+                navigate('/')
+            } else {
+                toast.error('A error has been encountered, Please try again later')
+            }
+        })
+    }
+
+    return (
+        <div className="max-w-4xl m-auto flex pt-4 gap-4">
+            <form className="grow flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); placeOrder() }}>
+                <div className="text-sm text-gray-500 rounded-lg shadow-md p-3 border">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-xs ${orderState === ORDERSTATE.TYPE ? 'text-gray-600' : 'text-gray-400'}`}>Order</h2>
+                        <Check color="green" size={'18'} />
+                    </div>
+                    {
+                        orderState === ORDERSTATE.TYPE ? <div className="mt-3">
+                            <RadioGroup
+                                aria-label="Order Type"
+                                className="flex flex-col gap-3"
+                                name='deliveryOption'
+                                value={orderDetails.deliveryOption}
+                                onChange={(e) => { setOrderDetails(prev => ({ ...prev, deliveryOption: e })) }}
+                            >
+                                <RadioGroup.Option value={DELIVERYTYPE.DELIVERY}>
+                                    {
+                                        ({ checked }) => <div className="flex gap-2 items-center">
+                                            <input type='radio' checked={checked} />
+                                            <span>Delivery</span>
+                                        </div>
+                                    }
+                                </RadioGroup.Option>
+                                <RadioGroup.Option value={DELIVERYTYPE.TAKEAWAY}>
+                                    {
+                                        ({ checked }) => <div className="flex gap-2 items-center">
+                                            <input type='radio' checked={checked} />
+                                            <span>Takeaway</span>
+                                        </div>
+                                    }
+                                </RadioGroup.Option>
+                            </RadioGroup>
+                            <div className="flex flex-row-reverse gap-2">
+                                <button className="primary-button" onClick={(e) => { e.preventDefault(); setOrderState(ORDERSTATE.LOCATION) }}>Next</button>
+                            </div>
+                        </div> : ''
+                    }
+                </div>
+
+                <div className="text-sm text-gray-500 rounded-lg shadow-md p-3 border">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-xs ${orderState === ORDERSTATE.LOCATION ? 'text-gray-600' : 'text-gray-400'}`}>Address</h2>
+                        <Check color="green" size={'18'} />
+                    </div>
+                    {
+                        orderState === ORDERSTATE.LOCATION ? <div className="mt-3">
+                            <RadioGroup
+                                aria-label="Delivery Addresses"
+                                className="flex flex-col gap-3"
+                                value={orderDetails.address}
+                                onChange={(e) => { setOrderDetails(prev => ({ ...prev, address: e })) }}
+                            >
+                                <RadioGroup.Option value="Address1">
+                                    {
+                                        ({ checked }) => <div className="flex gap-2 items-center">
+                                            <input type='radio' checked={checked} />
+                                            <span>Address1</span>
+                                        </div>
+                                    }
+                                </RadioGroup.Option>
+                                <RadioGroup.Option value="Address2">
+                                    {
+                                        ({ checked }) => <div className="flex gap-2 items-center">
+                                            <input type='radio' checked={checked} />
+                                            <span>Address2</span>
+                                        </div>
+                                    }
+                                </RadioGroup.Option>
+                            </RadioGroup>
+                            <div className="flex flex-row-reverse gap-2">
+                                <button className="primary-button" onClick={(e) => { e.preventDefault(); setOrderState(ORDERSTATE.PAYMENT) }}>Next</button>
+                                <button className="primary-button" onClick={(e) => { e.preventDefault(); setOrderState(ORDERSTATE.TYPE) }}>Back</button>
+                            </div>
+                        </div> : ''
+                    }
+                </div>
+
+                <div className="text-sm text-gray-500 rounded-lg shadow-md p-3 border">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-xs ${orderState === ORDERSTATE.PAYMENT ? 'text-gray-600' : 'text-gray-400'}`}>Payment</h2>
+                        <Check color="green" size={'18'} />
+                    </div>
+                    {
+                        orderState === ORDERSTATE.PAYMENT ? <div className='mt-3'>
+                            <RadioGroup
+                                aria-label="Payment Options"
+                                className="flex flex-col gap-3"
+                                name="payment-option"
+                                value={orderDetails.payment}
+                                onChange={(e) => { setOrderDetails(prev => ({ ...prev, payment: e })) }}
+                            >
+                                <RadioGroup.Option value={PAYMENT.CASH}>
+                                    {
+                                        ({ checked }) => <div className="flex gap-2 items-center">
+                                            <input type='radio' checked={checked} />
+                                            <span>Cash on {orderDetails.deliveryOption}</span>
+                                        </div>
+                                    }
+                                </RadioGroup.Option>
+                            </RadioGroup>
+                            <div className="flex flex-row-reverse gap-2">
+                                <button className="primary-button" onClick={(e) => { e.preventDefault(); setOrderState(ORDERSTATE.LOCATION) }}>Back</button>
+                            </div>
+                        </div> : ''
+                    }
+                </div>
+                <button disabled={!valid} type="submit" className="primary-button self-start">Place Order</button>
+            </form>
+            <div className="float-right w-[400px]">
+                <h2>Your Cart</h2>
+                <Cartpage />
             </div>
-            </div>
-          </div>
         </div>
-      )}
-
-      {deliveryOption === "Takeaway" && (
-        <div className="item-box">
-          <div className="row summary3">
-            <div className="col-8">
-              <h5>Payment Options</h5>
-              <RadioGroup
-                style={{
-                  marginTop:"1.2rem",
-                }}
-                aria-label="Payment Options"
-                name="payment-option"
-                value={paymentOption}
-                onChange={handlePaymentOptionChange}
-              >
-                <FormControlLabel
-                  value="Cash on Delivery"
-                  control={<Radio />}
-                  label="Cash on Delivery"
-                />
-              </RadioGroup>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  )
+    )
 }

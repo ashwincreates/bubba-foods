@@ -5,7 +5,7 @@ import Cartpage from "../pages/CartPage"
 import Modal from "./Dialog/Dialog"
 
 function Cart() {
-    const {cart} = useContext(FoodItemContext)
+    const { cart } = useContext(FoodItemContext)
     const [count, setCount] = useState(0)
 
     useEffect(() => {
@@ -22,7 +22,9 @@ function Cart() {
                     <h2>Your Cart</h2>
                     <Modal.Close />
                 </div>
-                <Cartpage />
+                <div className="overflow-y-auto my-3">
+                    <Cartpage />
+                </div>
             </Modal>
             <Link to={'checkout'} className="primary-button self-center">Checkout</Link>
         </div>

@@ -20,6 +20,7 @@ import Cart from './components/Cart';
 import Rewards from './pages/Rewards';
 import CheckOut from './pages/CheckOut';
 import Support from './pages/Support';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     return (
@@ -79,6 +80,7 @@ function App() {
                 <Route path='login' element={<LoginForm />} />
                 <Route path='register' element={<Register />} />
             </Routes>
+            <Toaster position='bottom-center' reverseOrder={false}/>
         </>
     );
 }
