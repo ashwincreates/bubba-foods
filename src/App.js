@@ -20,6 +20,7 @@ import Cart from './components/Cart';
 import Rewards from './pages/Rewards';
 import CheckOut from './pages/CheckOut';
 import Support from './pages/Support';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     return (
@@ -57,7 +58,7 @@ function App() {
                         <Route path='orders' element={<OrderHistory />} />
                         <Route path='bookings' element={<BookingHistory />} />
                         <Route path='rewards' element={<Rewards />} />
-                        <Route path='support' element={<Support/>} />
+                        <Route path='support' element={<Support />} />
                         {/* <Route path='favourites' element={}/> */}
                     </Route>
                 </Route>
@@ -79,6 +80,7 @@ function App() {
                 <Route path='login' element={<LoginForm />} />
                 <Route path='register' element={<Register />} />
             </Routes>
+            <Toaster position='bottom-center' reverseOrder={false} />
         </>
     );
 }

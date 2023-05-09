@@ -5,16 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import UserProvider from './context/UserContext';
-import { FoodItemModalProvider } from './context/FoodItemModalContext';
+import { FoodItemProvider } from './context/FoodItemModalContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
             <UserProvider>
-                <FoodItemModalProvider>
+                <FoodItemProvider>
                     <App />
-                </FoodItemModalProvider>
+                </FoodItemProvider>
             </UserProvider>
         </BrowserRouter>
     </React.StrictMode>
