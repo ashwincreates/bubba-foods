@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
 import ItemCard from "../components/ItemCard";
-
-
-
 import { BrandContext } from "../context/BrandContext";
+
+
+
 
 
 
@@ -81,7 +81,6 @@ function Dining() {
                     }
 
                 </section>
-
             </main>
 
         </div>

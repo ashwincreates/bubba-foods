@@ -3,11 +3,11 @@ import Header from "../components/Header";
 import ItemCard from "../components/ItemCard";
 import Menu from "../components/Menu/Menu";
 import { BrandContext } from "../context/BrandContext";
-import { FoodItemModalContext } from "../context/FoodItemModalContext";
+import { FoodItemContext } from "../context/FoodItemModalContext";
 
 function Delivery() {
     const { id } = useContext(BrandContext)
-    const { openModal } = useContext(FoodItemModalContext)
+    const { openModal } = useContext(FoodItemContext)
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function Delivery() {
     return (
         <div className="mx-3 md:mx-4 flex gap-4">
             <Menu menu={menu}/>
-            <main className="overflow-auto no-scrollbar h-[calc(100vh_-_100px)] scroll-smooth px-2">
+            <main className="overflow-auto no-scrollbar h-[calc(100vh_-_164px)] scroll-smooth px-2">
                 {
                     Object.keys(menu).map(e =>
                         <>
@@ -38,6 +38,7 @@ function Delivery() {
                                     menu[e].map(item =>
                                         <ItemCard
                                             menuItem={{
+                                                id: item.ID,
                                                 src: item.Image_Url__c,
                                                 name: item.Name__c,
                                                 description: item.Description__c,
