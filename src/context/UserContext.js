@@ -14,7 +14,7 @@ function UserReducer(state, action) {
 function UserProvider({ children }) {
     const [user, dispatchUser] = useReducer(UserReducer)
     return (
-        <UserContext.Provider value={{ user, dispatchUser }}>
+        <UserContext.Provider value={{ user: { name: 'John', id: 'a025i00000KtXchAAF' }, dispatchUser }}>
             {children}
         </UserContext.Provider>
     )
