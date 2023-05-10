@@ -11,7 +11,7 @@ function Delivery() {
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/menu/${id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/menu/get/${id}`)
             .then(response => response.json())
             .then(data => {
                 // Grouping items based on Speciality

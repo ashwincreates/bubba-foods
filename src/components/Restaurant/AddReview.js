@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "../Dialog/Dialog";
 
 function ReviewPopup({ onClose }) {
   const [review, setReview] = useState("");
@@ -17,7 +18,7 @@ function ReviewPopup({ onClose }) {
     <div className="review-popup-container">
       <div className="review-popup">
         <h2>Review</h2>
-        <form onSubmit={handleSubmit}>
+        <form >
           <label htmlFor="review-text">Write your review:</label>
           <textarea
             id="review-text"

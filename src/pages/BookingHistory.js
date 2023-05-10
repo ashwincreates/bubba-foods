@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./BookingHistory.css";
 import Reviewpopup from'./Reviewpopup';
 
 function BookingHistory(props) {
+  
   const [showReviewpopup, setShowReviewpopup] = useState(false);
-  const handleReviewClick = () => {
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  const handleReviewClick = (bookingId) => {
+    setSelectedBookingId(bookingId);
     setShowReviewpopup(true);
   };
 
   const handleClosePopup = () => {
+    setSelectedBookingId(null);
     setShowReviewpopup(false);
   };
+
   const [bookings, setBookings] = useState([
     {
       id: 1,
@@ -61,6 +67,7 @@ function BookingHistory(props) {
               <th>Time</th>
               <th>Number of Persons</th>
               <th>Table Number</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +78,14 @@ function BookingHistory(props) {
                 <td>{booking.time}</td>
                 <td>{booking.partySize}</td>
                 <td>{booking.tableNumber}</td>
+                <td>
+                  <button
+                    className='primary-button'
+                    onClick={() => handleReviewClick(booking.id)}
+                  >
+                    Add Comment
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -78,9 +93,11 @@ function BookingHistory(props) {
       ) : (
         <p>You have no booking history.</p>
       )}
-                     <button className='primary-button self-center'onClick={handleReviewClick} style={{marginTop:'2rem', marginBottom:'2rem',marginLeft:'23rem'}}>Add Comment</button>
-                        {showReviewpopup && (
-        <Reviewpopup onClose={handleClosePopup} />
+      {showReviewpopup && selectedBookingId !== null && (
+        <Reviewpopup
+          bookingId={selectedBookingId}
+          onClose={handleClosePopup}
+        />
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import {React,useState} from 'react';
 import { MessageCircle, Star, ThumbsUp } from 'react-feather';
+import Reviewpopup from '../../pages/Reviewpopup';
 import Header from '../Header';
 import AddReviewpopup from '../Restaurant/AddReview';
 // import './'
@@ -12,7 +13,7 @@ const reviews = [
     review: "Great food and atmosphere! Highly recommend.",
     // rating:4,
     // helpfulCount: 12,
-    commentCount: 4,
+    // commentCount: 4,
   },
   {
     id: 2,
@@ -21,7 +22,7 @@ const reviews = [
     // rating: 5,
     review: "The best restaurant in town! Amazing food and service.",
     // helpfulCount: 24,
-    commentCount: 6,
+    // commentCount: 6,
   },
   {
     id: 3,
@@ -30,7 +31,7 @@ const reviews = [
     // rating: 3,
     review: "Food was okay, but service could have been better.",
     // helpfulCount: 5,
-    commentCount: 1,
+    // commentCount: 1,
   },
   {
     id: 4,
@@ -39,7 +40,7 @@ const reviews = [
     // rating: 5,
     review: "Incredible food and service! Highly recommend the steak.",
     // helpfulCount: 18,
-    commentCount: 3,
+    // commentCount: 3,
   },
   {
     id: 5,
@@ -48,7 +49,7 @@ const reviews = [
     // rating: 2,
     review: "Disappointing experience. Food was cold and service was slow.",
     // helpfulCount: 3,
-    commentCount: 2,
+    // commentCount: 2,
   },
   {
     id: 6,
@@ -57,7 +58,7 @@ const reviews = [
     // rating: 4,
     review: "Great selection of dishes and cocktails. Will definitely come back!",
     // helpfulCount: 10,
-    commentCount: 2,
+    // commentCount: 2,
   },
   {
     id: 7,
@@ -66,7 +67,7 @@ const reviews = [
     // rating: 5,
     review: "Absolutely loved this place! Everything was perfect.",
     // helpfulCount: 22,
-    commentCount: 7,
+    // commentCount: 7,
   },
   {
     id: 8,
@@ -75,7 +76,7 @@ const reviews = [
     // rating: 3,
     review: "Decent food, but the noise level was too high for my liking.",
     // helpfulCount: 7,
-    commentCount: 1,
+    // commentCount: 1,
   },
   {
     id: 9,
@@ -84,7 +85,7 @@ const reviews = [
     // rating: 4,
     review: "Overall a great experience. The staff was friendly and attentive.",
     // helpfulCount: 13,
-    commentCount: 4,
+    // commentCount: 4,
   },
   {
     id: 10,
@@ -93,28 +94,29 @@ const reviews = [
     // rating: 5,
     review: "The food was amazing and the prices were very reasonable. Highly recommend!",
     // helpfulCount: 16,
-    commentCount: 5,
+    // commentCount: 5,
   },
 ];
 
 function Reviews() {
-  const [showReviewpopup, setShowReviewpopup] = useState(false);
-  const handleReviewClick = () => {
-    setShowReviewpopup(true);
-  };
+  // const [showReviewpopup, setShowReviewpopup] = useState(false);
+  // const handleReviewClick = () => {
+  //   setShowReviewpopup(true);
+  // };
 
-  const handleClosePopup = () => {
-    setShowReviewpopup(false);
-  };
+  // const handleClosePopup = () => {
+  //   setShowReviewpopup(false);
+  // };
   return (
     <div className="max-w-3xl m-auto max-md:px-4">
       <div className='flex justify-between'>
         <Header title={`${reviews.length} reviews`} />
-        <button className='primary-button self-center'onClick={handleReviewClick}>Add Review</button>
+        {/* <button className='primary-button self-center'onClick={handleReviewClick}>Add Review</button> */}
+        {/* <Reviewpopup /> */}
       </div>
-      {showReviewpopup && (
+      {/* {showReviewpopup && (
         <AddReviewpopup onClose={handleClosePopup} />
-      )}
+      )} */}
       {
         reviews.slice(0, 10).map((review) => (
           <div key={review.id} className="flex flex-col gap-4 border-b border-gray-200 py-4">
@@ -145,12 +147,12 @@ function Reviews() {
                     {review.helpfulCount}
                   </p>
                 </span> */}
-                <span className='flex gap-2 items-center'>
+                {/* <span className='flex gap-2 items-center'>
                   <span><MessageCircle size={20}/></span>
                   <p>
                     {review.commentCount}
                   </p>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>

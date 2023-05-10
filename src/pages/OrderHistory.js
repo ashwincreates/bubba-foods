@@ -67,10 +67,16 @@ function OrderHistory() {
     <div className="order-history-container">
       {orders.map((order) => (
         <div className="order-history-item" key={order.id}>
+
           <div className="order-history-header">
+            
             <div className="order-history-date">{order.date}</div>
             <div className="order-history-total">{order.total}</div>
           </div>
+          <button className='primary-button self-center'onClick={handleReviewClick} style={{marginBottom:'2rem',marginLeft:'23rem'}}>Add Comment</button>
+                        {showReviewpopup && (
+        <Reviewpopup onClose={handleClosePopup} />
+      )}
           <div className="order-history-items">
             {order.items.map((item) => (
               <div className="order-history-item-details" key={item.id}>
@@ -80,15 +86,15 @@ function OrderHistory() {
                 <div className="order-history-item-quantity">
                   Quantity: {item.quantity}
                 </div>
+                
               </div>
+              
             ))}
+        
           </div>
         </div>
       ))}
-                  <button className='primary-button self-center'onClick={handleReviewClick} style={{marginBottom:'2rem',marginLeft:'23rem'}}>Add Comment</button>
-                        {showReviewpopup && (
-        <Reviewpopup onClose={handleClosePopup} />
-      )}
+   
     </div>
   );
 }
