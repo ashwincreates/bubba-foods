@@ -11,6 +11,7 @@ import Reviews from "./components/Restaurant/Reviews";
 import Photos from "./components/Restaurant/Photos";
 import Menu from "./components/Restaurant/Menu";
 import Register from "./pages/Register";
+import UserProfileForm from "./pages/ForgotPassword";
 import UserInfo from "./components/UserInfo";
 import ProfileDetails from "./pages/ProfileDetails";
 import Profile from "./pages/Profile";
@@ -95,6 +96,8 @@ function App() {
         />
         <Route path="login" element={<LoginForm />} />
         <Route path="register" element={<Register />} />
+        <Route path="registerpage" element={<Register />} />
+        <Route path="forgot" element={<UserProfileForm />} />
       </Routes>
     </>
   );
