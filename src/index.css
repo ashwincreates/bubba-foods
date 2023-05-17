@@ -8,9 +8,11 @@
   html {
     font-family: Poppins, system-ui, sans-serif;
   }
+
+  #root {
+    height: 100%;
+  }
 }
-
-
 
 @layer utilities {
   .primary-button {

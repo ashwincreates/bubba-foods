@@ -1,26 +1,26 @@
 import { useContext, useEffect, useState } from "react";
+import { BrandContext } from "../../context/BrandContext";
 import Carousel from "./Carousel";
-import { BrandContext } from "../context/BrandContext";
 
 export default function AdCarousel() {
 
-    const { id } = useContext(BrandContext)
+    const brand = useContext(BrandContext)
     const [ads, setAds] = useState([])
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/ad/${id}`)
+        fetch(`${process.env.REACT_APP_ADS_URL}/ads/${brand ? brand.id : ''}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
                 setAds(data)
             })
-    }, [])
+    }, [brand])
 
     return (
-        <Carousel className="md:max-w-6xl m-auto relative">
+        <Carousel className="m-auto relative">
             {
-                ads.map(e =>
-                    <Carousel.AdItem key={e} src={"https://images.unsplash.com/photo-1606491956689-2ea866880c84"} />
+                ads.map(ad =>
+                    <Carousel.AdItem src={ad.Image__c} goto={ad.Go_to__c}/>
                 )
             }
         </Carousel>

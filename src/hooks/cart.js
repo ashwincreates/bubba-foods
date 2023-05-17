@@ -5,9 +5,9 @@ function cartReducer(cart, action) {
         case 'addItem': {
             let newCart = structuredClone(cart)
             if (action.item.Brand__c in newCart) {
-                newCart[action.item.Brand__c].push(action.item)
+                newCart[action.item.Brand__c].push({...action.item, addons: action.addons})
             } else {
-                newCart[action.item.Brand__c] = [action.item]
+                newCart[action.item.Brand__c] = [{...action.item, addons: action.addons}]
             }
             return newCart
         }

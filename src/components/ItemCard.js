@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 function ItemCard({menuItem, to, action, offer, onClick}) {
     return (
         <Link to={to} onClick={onClick} id={menuItem.id}>
-            <div className="rounded md:hover:scale-105 ease-in duration-50 overflow-hidden drop-shadow-md bg-white flex-col basis-[300px] min-w-0 grow-0 shrink-0 flex min-w-0 align-start">
+            <div className="rounded md:hover:scale-105 ease-in duration-50 overflow-hidden drop-shadow-md bg-white flex-col w-[300px] flex align-start">
                 <img className="object-cover h-[250px]" src={menuItem.src} alt="item" />
                 <div className="p-3">
                     <div className="flex justify-between">

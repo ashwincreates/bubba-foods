@@ -16,15 +16,15 @@ function Carousel({ children, ...props }) {
 
 	return (
 		<div className="relative" {...props}>
-			<div className="viewport overflow-hidden md:py-4" ref={emblaRef}>
+			<div className="viewport overflow-hidden" ref={emblaRef}>
 				<div className="container flex gap-4">
 					{children}
 				</div>
 			</div>
-			<button className="max-md:hidden absolute flex items-center justify-center top-0 left-0 h-full w-[50px] hover:bg-white/25" onClick={scrollPrev}>
+			<button className="max-md:hidden absolute flex items-center justify-center top-0 left-0 h-full w-[50px] hover:bg-gray-900/25" onClick={scrollPrev}>
 				<ArrowLeft color="white" />
 			</button>
-			<button className="max-md:hidden absolute flex items-center justify-center top-0 right-0 h-full w-[50px] hover:bg-white/25" onClick={scrollNext}>
+			<button className="max-md:hidden absolute flex items-center justify-center top-0 right-0 h-full w-[50px] hover:bg-gray-900/25" onClick={scrollNext}>
 				<ArrowRight color="white" />
 			</button>
 		</div>
@@ -41,9 +41,9 @@ function Item({ src }) {
 
 function AdItem({ src, goto }) {
 	return (
-		<div className="rounded overflow-hidden basis-full flex justify-center items-center grow-0 shrink-0 min-w-0 w-full h-[300px]">
-            <Link to={goto}>
-			    <img src={src} alt="carousel slide" />
+		<div className="md:rounded overflow-hidden basis-full flex grow-0 shrink-0 min-w-0 w-full h-[300px]">
+            <Link to={goto} className="w-full">
+			    <img src={src} className={"w-full h-full object-cover"} alt="carousel slide" />
             </Link>
 		</div>
 	)

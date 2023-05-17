@@ -7,14 +7,9 @@ function UserInfo() {
   const { user } = useContext(UserContext);
   return (
     <>
-      Welcome, {user ? user.name : "Guest"}
-      {/* <img
-        style={{ maxWidth: "20px" }}
-        src="images/logout.png"
-        alt="user"
-      ></img> */}
+      <span className="hidden md:block">Welcome, {user ? user.Name__c : "Guest"}</span>
       {user ? (
-        <Link to="/profile/wadd/details">
+        <Link to={`/profile/${user.Id}/details`}>
           <User size={20} />
         </Link>
       ) : (

@@ -21,6 +21,7 @@ import Rewards from './pages/Rewards';
 import CheckOut from './pages/CheckOut';
 import Support from './pages/Support';
 import { Toaster } from 'react-hot-toast';
+import Protected from './components/Protected';
 
 export default function App() {
     return (
@@ -63,7 +64,7 @@ export default function App() {
                     </Route>
                 </Route>
                 <Route path='checkout' element={
-                    <>
+                    <Protected>
                         <NavBar>
                             <NavBar.Brand>
                                 <Link to='/'>
@@ -75,7 +76,7 @@ export default function App() {
                             </NavBar.Items>
                         </NavBar>
                         <CheckOut />
-                    </>
+                    </Protected>
                 } />
                 <Route path='login' element={<LoginForm />} />
                 <Route path='register' element={<Register />} />

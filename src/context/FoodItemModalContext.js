@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react"
-import { createContext, Fragment, useState } from "react"
+import { createContext, Fragment, useEffect, useState } from "react"
 import { X } from "react-feather"
 import useCart from "../hooks/cart"
 
@@ -9,15 +9,40 @@ export function FoodItemProvider({ children }) {
 
     const [item, setItem] = useState(null)
     const [cart, dispatch] = useCart()
+    const [addon, setAddon] = useState([])
+
+    const [selectedAddon, setSelectedAddon] = useState([])
+
     let [isOpen, setIsOpen] = useState(false)
+
+    useEffect(() => {
+        if (item) {
+            fetch(`${process.env.REACT_APP_API_URL}/menu/${item.Id}/addons`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    setAddon(data)
+                })
+        }
+    }, [item])
 
     function closeModal() {
         setIsOpen(false)
+        setAddon([])
+        setSelectedAddon([])
     }
 
     function openModal(item) {
         setItem(item)
         setIsOpen(true)
+    }
+
+    function toggleAddon(item) {
+        if (selectedAddon.includes(item)) {
+            setSelectedAddon(selectedAddon.filter((addon) => addon.Id !== item.Id))
+        } else {
+            setSelectedAddon([...selectedAddon, item])
+        }
     }
 
     return (
@@ -65,17 +90,36 @@ export function FoodItemProvider({ children }) {
                                                         </div>
                                                         <div className="grow">
                                                             <h5 className="text-xs text-gray-400">Addon</h5>
+                                                            {
+                                                                addon ?
+                                                                    addon.map(item =>
+                                                                        <div className="flex gap-3 py-2">
+                                                                            <input
+                                                                                id={item.Id}
+                                                                                type="checkbox"
+                                                                                value={item.Id}
+                                                                                checked={selectedAddon.includes(item)}
+                                                                                onChange={(_) => { toggleAddon(item) }}
+                                                                            />
+                                                                            <label htmlFor={item.Id} className="w-full flex justify-between">
+                                                                                <span className="text-xs">{item.Name__c}</span>
+                                                                                <span className="text-xs font-bold">+Rs. {item.Price__c}</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    ) : ''
+                                                            }
                                                         </div>
-                                                        <div className="flex flex-row-reverse">
+                                                        <div className="flex flex-row-reverse gap-3 items-center">
                                                             <button
                                                                 className="primary-button"
                                                                 onClick={() => {
-                                                                    dispatch({ type: 'addItem', item: item })
+                                                                    dispatch({ type: 'addItem', item: item, addons: selectedAddon })
                                                                     closeModal()
                                                                 }}
                                                             >
                                                                 Add to Cart
                                                             </button>
+                                                            <span className="text-lg font-bold">Rs. {item.Price__c + selectedAddon.reduce((prev, curr) => prev + curr.Price__c, 0)}</span>
                                                         </div>
                                                     </div>
                                                 </div>

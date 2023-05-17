@@ -46,11 +46,11 @@ function Delivery() {
                                                 rating: item.Ratings__c
                                             }}
                                             action={<button className="primary-button">Add</button>}
-                                            offer={
-                                                <div className="p-2 bg-orange-200 text-orange-400 text-sm">
-                                                    Grab Now over 50% off
-                                                </div>
-                                            }
+                                            // offer={
+                                            //     <div className="p-2 bg-orange-200 text-orange-400 text-sm">
+                                            //         Grab Now over 50% off
+                                            //     </div>
+                                            // }
                                             onClick={(_) => openModal(item)}
                                         />
                                     )

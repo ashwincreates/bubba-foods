@@ -15,7 +15,7 @@ function Brands({ src, to }) {
         <>
             {
                 brands.map((brand) =>
-                    <Link to={`${brand.Name__c}/${brand.Id}/delivery`} className='rounded-full overflow-hidden md:grow md:rounded-lg flex h-[100px]'>
+                    <Link to={`${brand.Name__c}/${brand.Id}/delivery`} className='rounded-full overflow-hidden md:grow sm:rounded-lg flex h-[100px] w-[100px] sm:max-w-[300px]'>
                         <img className='object-cover w-full' src={`/images/${brand.Name__c}.png`} alt="brand logo" />
                     </Link>
                 )
