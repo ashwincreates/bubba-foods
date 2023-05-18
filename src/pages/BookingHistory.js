@@ -1,106 +1,85 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import "./BookingHistory.css";
-import Reviewpopup from'./Reviewpopup';
+import Reviewpopup from './Reviewpopup';
+
+const slots = {
+    1: "12:00 PM",
+    2: "1:00 PM",
+    3: "2:00 PM",
+    4: "6:00 PM"
+}
 
 function BookingHistory(props) {
-  
-  const [showReviewpopup, setShowReviewpopup] = useState(false);
-  const [selectedBookingId, setSelectedBookingId] = useState(null);
 
-  const handleReviewClick = (bookingId) => {
-    setSelectedBookingId(bookingId);
-    setShowReviewpopup(true);
-  };
+    const [showReviewpopup, setShowReviewpopup] = useState(false);
+    const [selectedBookingId, setSelectedBookingId] = useState(null);
+    const [booking, setBookings] = useState([])
+    const { user } = useContext(UserContext)
 
-  const handleClosePopup = () => {
-    setSelectedBookingId(null);
-    setShowReviewpopup(false);
-  };
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/reserve/get/${user.Id}`)
+            .then(response => response.json())
+            .then(data => {
+                setBookings(data)
+            })
+    }, [user.Id])
 
-  const [bookings, setBookings] = useState([
-    {
-      id: 1,
-      restaurant: "Pizza Place",
-      date: "2023-04-20",
-      time: "12:30 PM",
-      partySize: 4,
-      tableNumber: 2,
-    },
-    {
-      id: 2,
-      restaurant: "Burger Joint",
-      date: "2023-04-22",
-      time: "7:00 PM",
-      partySize: 2,
-      tableNumber: 1,
-    },
-    {
-      id: 3,
-      restaurant: "Taco Spot",
-      date: "2023-04-23",
-      time: "1:00 PM",
-      partySize: 3,
-      tableNumber: 3,
-    },
-    {
-      id: 4,
-      restaurant: "Sushi House",
-      date: "2023-04-25",
-      time: "8:00 PM",
-      partySize: 6,
-      tableNumber: 4,
-    },
-  ]);
+    const handleReviewClick = (bookingId) => {
+        setSelectedBookingId(bookingId);
+        setShowReviewpopup(true);
+    };
 
-  const filteredBookings = bookings.filter(
-    (booking) => booking.userId === props.loggedInUserId
-  );
+    const handleClosePopup = () => {
+        setSelectedBookingId(null);
+        setShowReviewpopup(false);
+    };
 
-  return (
-    <div className="">
-      {filteredBookings.length > 0 ? (
-        <table className="table-auto w-full">
-          <thead className="border-b p-6">
-            <tr>
-              <th>Restaurant</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Number of Persons</th>
-              <th>Table Number</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredBookings.map((booking) => (
-              <tr key={booking.id}>
-                <td>{booking.restaurant}</td>
-                <td>{booking.date}</td>
-                <td>{booking.time}</td>
-                <td>{booking.partySize}</td>
-                <td>{booking.tableNumber}</td>
-                <td>
-                  <button
-                    className='primary-button'
-                    onClick={() => handleReviewClick(booking.id)}
-                  >
-                    Add Comment
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>You have no booking history.</p>
-      )}
-      {showReviewpopup && selectedBookingId !== null && (
-        <Reviewpopup
-          bookingId={selectedBookingId}
-          onClose={handleClosePopup}
-        />
-      )}
-    </div>
-  );
+    return (
+        <div className="">
+            {booking.length > 0 ? (
+                <table className="table-auto w-full">
+                    <thead className="border-b p-6">
+                        <tr>
+                            <th>Restaurant</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Number of Persons</th>
+                            <th>Table Number</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {booking.map((booking) => (
+                            <tr key={booking.Id}>
+                                <td>{booking.restaurant}</td>
+                                <td>{booking.Date__c}</td>
+                                <td>{slots[booking.Slot__c]}</td>
+                                <td>{booking.partySize}</td>
+                                <td>{booking.tableNumber}</td>
+                                <td>
+                                    <button
+                                        className='primary-button'
+                                        onClick={() => handleReviewClick(booking.id)}
+                                    >
+                                        Add Comment
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>You have no booking history.</p>
+            )}
+            {showReviewpopup && selectedBookingId !== null && (
+                <Reviewpopup
+                    bookingId={selectedBookingId}
+                    onClose={handleClosePopup}
+                />
+            )}
+        </div>
+    );
 }
 
 export default BookingHistory;

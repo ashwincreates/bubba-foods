@@ -53,15 +53,29 @@ export default function App() {
                         <Route path='photos' element={<Photos />} />
                         <Route path='menu' element={<Menu />} />
                     </Route>
-                    <Route path='/profile/:userid/' element={<ProfileDetails />}>
-                        <Route path='details' element={<Profile />} />
-                        <Route path='addressbook' element={<AddressBook />} />
-                        <Route path='orders' element={<OrderHistory />} />
-                        <Route path='bookings' element={<BookingHistory />} />
-                        <Route path='rewards' element={<Rewards />} />
-                        <Route path='support' element={<Support />} />
-                        {/* <Route path='favourites' element={}/> */}
-                    </Route>
+                </Route>
+                <Route path='profile/:userid/' element={
+                    <>
+                        <NavBar>
+                            <NavBar.Brand>
+                                <Link to='/'>
+                                    <img src='/images/BubbaFoodH.png' alt='logo' width='130px' />
+                                </Link>
+                            </NavBar.Brand>
+                            <NavBar.Items>
+                                <UserInfo />
+                            </NavBar.Items>
+                        </NavBar>
+                        <ProfileDetails />
+                    </>
+                }>
+                    <Route path='details' element={<Profile />} />
+                    <Route path='addressbook' element={<AddressBook />} />
+                    <Route path='orders' element={<OrderHistory />} />
+                    <Route path='bookings' element={<BookingHistory />} />
+                    <Route path='rewards' element={<Rewards />} />
+                    <Route path='support' element={<Support />} />
+                    {/* <Route path='favourites' element={}/> */}
                 </Route>
                 <Route path='checkout' element={
                     <Protected>

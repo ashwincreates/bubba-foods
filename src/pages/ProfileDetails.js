@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./ProfileDetails.css";
 import Banner from "../components/Banner/Banner";
-import { NavLink, Outlet } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { FoodItemContext } from "../context/FoodItemModalContext";
@@ -9,6 +9,8 @@ import { FoodItemContext } from "../context/FoodItemModalContext";
 function ProfileDetails() {
     const { user, dispatchUser } = useContext(UserContext)
     const { dispatch } = useContext(FoodItemContext)
+
+    if (!user) return <Navigate to="/"/>
 
     return (
         <>
@@ -28,7 +30,6 @@ function ProfileDetails() {
                             <Link to="/" className="primary-button" onClick={() => { dispatch({ type: 'emptyCart' }); dispatchUser({ type: 'logout' }) }}>
                                 Logout
                             </Link>
-                            <button className="primary-button">Update info</button>
                         </div>
                     </div>
                 </div>

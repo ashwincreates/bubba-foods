@@ -22,7 +22,7 @@ function AddressBook() {
         <div className="flex flex-col gap-2 py-2">
             <section className="p-3 border rounded flex justify-between gap-4">
                 <div className="grow">
-                    <h1 className="text-xs text-gray-400">Address 1</h1>
+                    <h1 className="text-xs text-gray-400">Home</h1>
                     <input
                         className="disabled:bg-white enabled:border rounded mt-2 p-2 w-full"
                         disabled={!edit1}
@@ -49,7 +49,7 @@ function AddressBook() {
             </section>
             <section className="p-3 border rounded flex justify-between gap-4">
                 <div className="grow">
-                    <h1 className="text-xs text-gray-400">Address 2</h1>
+                    <h1 className="text-xs text-gray-400">Work</h1>
                     <input
                         className="disabled:bg-white enabled:border rounded mt-2 p-2 w-full"
                         disabled={!edit2}
@@ -76,7 +76,7 @@ function AddressBook() {
             </section>
             <section className="p-3 border rounded flex gap-4">
                 <div className="grow">
-                    <h1 className="text-xs text-gray-400">Address 3</h1>
+                    <h1 className="text-xs text-gray-400">Others</h1>
                     <input
                         className="disabled:bg-white enabled:border rounded mt-3 p-3 w-full"
                         disabled={!edit3}

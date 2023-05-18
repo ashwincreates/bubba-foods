@@ -26,7 +26,7 @@ const PAYMENT = {
 export default function CheckOut() {
 
     const { cart, dispatch } = useContext(FoodItemContext)
-    const { user } = useContext(UserContext)
+    const { user, dispatchUser } = useContext(UserContext)
     const navigate = useNavigate()
 
     const [orderDetails, setOrderDetails] = useState({
@@ -57,7 +57,7 @@ export default function CheckOut() {
 
     const placeOrder = () => {
         const requestBody = {
-            user_id: user.id,
+            user_id: user.Id,
             restaurant_id: 'a085i00000G7ExrAAF',
             address: orderDetails.address,
             type: orderDetails.deliveryOption,
@@ -79,6 +79,10 @@ export default function CheckOut() {
                 toast.error('A error has been encountered, Please try again later')
                 navigate('/')
             }
+            return response.json()
+        }).then(data => {
+            dispatchUser({type: 'rewards', payload: { rewards: data.rewards }})
+            toast.success(`Yohoo! +${data.newRewards} Bubba Coins`)
         })
     }
 

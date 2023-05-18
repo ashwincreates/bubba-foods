@@ -49,6 +49,7 @@ const LoginForm = () => {
             })
             .then(data => data)
         if (userId.id) {
+            localStorage.setItem('token', userId.token)
             await fetch(`${process.env.REACT_APP_API_URL}/user/get/${userId.id}`)
                 .then(response => response.json())
                 .then(data => dispatchUser({ type: 'login', payload: data }))

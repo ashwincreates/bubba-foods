@@ -16,7 +16,7 @@ function Cart() {
 
     }, [cart])
     return (
-        <div className="sticky bottom-0 top-[calc(100vh_-_64px)] w-full h-[64px] px-4 bg-white flex justify-between border-t">
+        <div className="fixed bottom-0 w-full h-[64px] px-4 bg-white flex justify-between border-t">
             <Modal title={`Your Cart (${count})`}>
                 <div className="flex w-full justify-between align-center">
                     <h2>Your Cart</h2>
